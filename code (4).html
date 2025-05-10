@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>要事第一 - 刘冬冬的主题阅读与实践</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #E31937; /* Tesla Red */
+            --color-secondary: #3B82F6; /* Cool Blue */
+            --color-accent: #10B981;  /* Emerald Green */
+            --color-text-base: #D1D5DB;
+            --color-text-muted: #9CA3AF;
+            --color-text-headings: #F3F4F6;
+            --color-bg-base: #111827;
+            --color-bg-card: #1F2937;
+            --color-border: #374151;
+        }
+
+        body {
+            background-color: var(--color-bg-base);
+            color: var(--color-text-base);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .text-primary { color: var(--color-primary); }
+        .bg-primary { background-color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+
+        .text-secondary { color: var(--color-secondary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+        
+        .text-accent { color: var(--color-accent); }
+
+        h1, h2, h3 { color: var(--color-text-headings); font-weight: 600; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        h2 { font-size: 1.875rem; margin-bottom: 1rem; margin-top: 2.5rem; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+
+        .section-title-underline {
+            border-bottom: 3px solid; /* Color will be applied by text-primary, text-secondary etc. */
+            display: inline-block;
+            padding-bottom: 0.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-card {
+            background-color: var(--color-bg-card);
+            border-radius: 12px; /* Softer radius */
+            padding: 24px;
+            margin-bottom: 24px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+        }
+
+        .story-card {
+            background-color: var(--color-bg-base); /* Slightly different or use a subtle gradient/texture */
+            border-left: 5px solid var(--color-secondary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .story-card h4 {
+            color: var(--color-secondary);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+
+        .quote-block {
+            border-left: 4px solid var(--color-primary);
+            padding: 12px 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--color-text-muted);
+            background-color: rgba(255,255,255,0.03);
+            border-radius: 0 8px 8px 0;
+        }
+        .author-cite {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            color: var(--color-text-base);
+            font-size: 0.9rem;
+            margin-top: 8px;
+        }
+        .dialogue-bubble {
+            background-color: var(--color-bg-card);
+            padding: 15px 20px;
+            border-radius: 15px;
+            position: relative;
+            margin: 10px 0;
+            border: 1px solid var(--color-border);
+        }
+        .dialogue-bubble.left::before {
+            content: "";
+            position: absolute;
+            bottom: 15px;
+            left: -10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent var(--color-bg-card) transparent transparent;
+        }
+         .dialogue-bubble.right::after {
+            content: "";
+            position: absolute;
+            bottom: 15px;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent var(--color-bg-card);
+        }
+        .speaker {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            color: var(--color-accent);
+        }
+
+
+        /* Image placeholder styling */
+        .img-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #374151; /* Darker placeholder */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text-muted);
+            font-style: italic;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        /* Accordion & Tabs (styles from previous version are fine, can be tweaked) */
+        .accordion-header { background-color: #2c3a4f; } /* Slightly adjusted */
+        .accordion-header:hover { background-color: #374761; }
+        .accordion-content { background-color: var(--color-bg-card); }
+        .tab-button.active { color: var(--color-primary); border-bottom-color: var(--color-primary); }
+
+
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+        #pseudoWorkModal.hidden { display: none; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-10 max-w-4xl">
+
+        <header class="text-center mb-16 scroll-animate">
+            <i class="fas fa-compass text-6xl text-primary mb-4"></i>
+            <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">要事第一</h1>
+            <p class="text-xl text-gray-300 mt-3">刘冬冬的主题阅读 · 悟与行</p>
+        </header>
+
+        <!-- Section: 吴军的核心观点 -->
+        <section id="wu-jun-core" class="mb-12">
+            <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                <i class="fas fa-book-open mr-3"></i>吴军的核心洞察
+            </h2>
+
+            <div class="content-card scroll-animate">
+                <div class="md:flex md:items-start">
+                    <div class="md:w-2/3 md:pr-8">
+                        <h3 class="text-2xl font-semibold text-primary mb-3"><i class="fas fa-cut mr-2"></i>做减法：通往高效能之路</h3>
+                        <p class="mb-3">吴军强调，要做到<strong class="text-primary">高速率、可叠加式进步</strong>，关键是<strong class="text-primary">做减法</strong>，懂得放弃。如同在森林中探险，放弃小岔路上的风景，才能更快到达目的地。</p>
+                        <p>“一个青年人，如果能坚持做到高速率成长、可叠加式进步，即使起点低，即使30岁还不富裕，10年后的成就也是不可限量的。”</p>
+                         <blockquote class="quote-block mt-4">
+                            刘冬冬感悟：做减法，聚焦运营，让过去的经验成为未来发展的基石，而不是想着35岁以后换行业、换工作。这让我对职业发展有了更坚定的信心。
+                        </blockquote>
+                    </div>
+                    <div class="md:w-1/3 mt-6 md:mt-0">
+                        <div class="img-placeholder">
+                            <i class="fas fa-road text-4xl mr-2"></i>
+                            <span>意象图：一条清晰路径穿过茂密复杂的森林，象征聚焦目标。</span>
+                        </div>
+                         <p class="text-xs text-center text-gray-400 mt-2">聚焦自己的特长，让经验成为基石。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card scroll-animate">
+                <h3 class="text-2xl font-semibold text-secondary mb-4"><i class="fas fa-hourglass-start mr-2"></i>慢下来：智慧的节奏</h3>
+                <p class="mb-3">“很多时候，我们做不好事情，是因为我们太匆忙、太着急，以至犯了太多原本可以避免的错误。当我们慢下来，重新审视自己的想法时，可以更正很多明显的错误。”</p>
+                
+                <div class="story-card scroll-animate">
+                    <h4><i class="fas fa-graduation-cap mr-2"></i>女儿的SAT考试奇迹：强制慢5秒</h4>
+                    <p>吴军的女儿在SAT考试前一周遇到瓶颈，他建议：“读完一道题后，等5秒钟再开始做。” 结果模拟考全对，正式考试也获得了满分。这看似浪费的5秒，实则提供了宝贵的思考时间。</p>
+                </div>
+
+                <div class="dialogue-bubble left scroll-animate">
+                    <p class="speaker">吴军 (自述)</p>
+                    <p>“我经常提醒自己，凡事要慢三拍。有时候周围的人让我做决定，我会说：‘我现在脑子不工作，让我明天再回答你。’慢慢做出的决定，常常是不同的，当然也是更好的。”</p>
+                </div>
+            </div>
+            
+            <div class="content-card scroll-animate">
+                 <div class="md:flex md:items-center">
+                    <div class="md:w-1/3 md:pr-6 mb-6 md:mb-0">
+                        <div class="img-placeholder">
+                             <i class="fas fa-balance-scale-right text-4xl mr-2"></i>
+                            <span>意象图：一个巨大的西瓜旁放着一小撮芝麻，形成鲜明对比。</span>
+                        </div>
+                        <p class="text-xs text-center text-gray-400 mt-2">“捡西瓜”而非“捡芝麻”</p>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-2xl font-semibold text-accent mb-3"><i class="fas fa-seedling mr-2"></i>量级思维：看见西瓜，而非芝麻</h3>
+                        <p>“眼里都是芝麻，就看不到西瓜。” 吴军指出，做事的数量差异可能只是几倍，但<strong class="text-accent">质量和影响力</strong>的差异可以是数量级的。</p>
+                        <div class="story-card scroll-animate mt-4">
+                            <h4><i class="fas fa-comments-dollar mr-2"></i>张先生的教诲：开眼界与格局</h4>
+                            <div class="dialogue-bubble right scroll-animate">
+                                <p class="speaker">张先生</p>
+                                <p>“我请你吃饭，带你享受生活，是为了让你开眼界...如果我把钱给了你，你就会满足于那几百元钱，格局就太小了。”</p>
+                            </div>
+                            <p class="mt-3">张先生还说：“在办公室里，永远不要省纸。” 这背后是成本与收益的量级考量，不要因小失大。</p>
+                            <blockquote class="quote-block mt-3">
+                                刘冬冬感悟：处理马桶销售下滑时，差点钻牛角尖去纠结“顺手买一件”的小问题，而忽略了更重要的销售策略。这就是戒不掉“贪”，既想做销售，又想钻细枝末节。
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card scroll-animate">
+                <h3 class="text-2xl font-semibold text-primary mb-3"><i class="fas fa-user-clock mr-2"></i>避免成为“积极的废人”</h3>
+                <p class="mb-3">吴军观察到，特别忙但绩效差的人，往往是“伪工作者”。他们通常有三个毛病：</p>
+                <ul class="list-disc list-inside ml-4 space-y-1 mb-4">
+                    <li>干了太多不该干的事情 (比如那位“工作狂”女同事)。</li>
+                    <li>喜欢同时做很多事情。</li>
+                    <li>迷信所谓的速成 (比如学英语混用多种口音材料)。</li>
+                </ul>
+                <button class="bg-primary text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm" onclick="openPseudoWorkModal()">
+                    <i class="fas fa-list-alt mr-2"></i>什么是伪工作？点击查看
+                </button>
+            </div>
+             <div class="content-card scroll-animate">
+                <h3 class="text-2xl font-semibold text-secondary mb-3"><i class="fas fa-lightbulb mr-2"></i>见识：不选择的幸福与专注的力量</h3>
+                <p class="mb-3">“人们的幸福感和成就的取得，却不是来回来去选择的结果，而是在没有多少选择时<strong class="text-secondary">深度经营</strong>的结果。”</p>
+                 <div class="story-card scroll-animate">
+                    <h4><i class="fas fa-user-graduate mr-2"></i>B女士的逆袭</h4>
+                    <p>一位大专毕业的B女士，并非特别聪明，但她目标明确——出国。她把所有业余时间都用在准备考试上，“少做点事情就好，把要做的事减到最少。” 最终被约翰·霍普金斯大学录取。到美国工作十几年，只跳过一次槽，最终也做到了管理层。</p>
+                </div>
+                <p class="mt-3">吴军做事的诀窍：“少做事，甚至不做事。能够跳出思维定式判断事情重要性，并且敢于<strong class="text-secondary">舍弃</strong>。”</p>
+            </div>
+
+        </section>
+        
+        <!-- Tabs for Other Authors/Sources -->
+        <section id="authors-insights" class="tabs-container scroll-animate mb-12">
+            <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                <i class="fas fa-users mr-3"></i>多方智慧：要事第一的共鸣
+            </h2>
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="liu-run">刘润</button>
+                <button class="tab-button" data-tab="covey">柯维</button>
+                <button class="tab-button" data-tab="naval">纳瓦尔</button>
+                <button class="tab-button" data-tab="liu-lan">刘澜</button>
+            </div>
+
+            <div id="liu-run" class="tab-content active">
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-3"><i class="fas fa-fire-extinguisher mr-2"></i>刘润：防火胜于救火</h3>
+                     <p>消防队通过检查隐患，从“救火”变为“防火”。专注于<strong class="text-secondary">重要但不紧急</strong>的事，在它变紧急前完成它。</p>
+                    <blockquote class="quote-block">
+                        刘冬冬追求的职场状态：65%～80%的时间花在“重要，但不紧急”的事上，把“重要，并且紧急”的事情，减少到20%～25%，达到“忙，但不焦虑”的境界。
+                    </blockquote>
+                </div>
+            </div>
+            <div id="covey" class="tab-content">
+                 <div class="content-card">
+                    <h3 class="text-xl font-semibold text-accent mb-3"><i class="fas fa-calendar-check mr-2"></i>柯维：高效能人士的习惯</h3>
+                    <p>史蒂芬·柯维：若要专注于要务，就得排除次要事务的牵绊，此时需要有<strong class="text-accent">说“不”的勇气</strong>。</p>
+                    <p class="mt-2 text-sm text-gray-400">刘冬冬感悟：滴答清单的四象限，就是为了实现要事第一。</p>
+                </div>
+            </div>
+            <div id="naval" class="tab-content">
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-primary mb-3"><i class="fas fa-gem mr-2"></i>纳瓦尔：关键的1%</h3>
+                    <p>纳瓦尔：“努力找到不会被浪费的<strong class="text-primary">1%</strong>。这1%对你是有意义的，值得你用余生去追求。一旦找到，你就要心无旁骛，全力以赴。”</p>
+                    <blockquote class="quote-block">
+                        刘冬冬体会：1%就是捡西瓜，99%就是捡芝麻。
+                    </blockquote>
+                </div>
+            </div>
+             <div id="liu-lan" class="tab-content">
+                <div class="content-card">
+                    <h3 class="text-xl font-semibold text-secondary mb-3"><i class="fas fa-bullseye mr-2"></i>刘澜：学习的秘诀是聚焦</h3>
+                    <p>刘澜：管理大师德鲁克：“如果说卓有成效有唯一秘诀的话，那就是<strong class="text-secondary">聚焦</strong>。”</p>
+                     <blockquote class="quote-block">
+                        乔布斯：“决定不做什么跟决定做什么同样重要。”
+                        <span class="author-cite">刘冬冬感悟：运营上，不做什么跟决定做什么同样重要。</span>
+                    </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <!-- 刘冬冬实践日志 -->
+        <section id="practice-log" class="scroll-animate mb-12">
+            <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                <i class="fas fa-pencil-alt mr-3"></i>刘冬冬的实践日志
+            </h2>
+            <div id="accordion-container" class="space-y-3">
+                <!-- Log entries will be styled by .accordion-item from previous CSS -->
+                 <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>2024年12月06日：初步实践与挑战</span>
+                        <i class="fas fa-chevron-right accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>进度真的很慢，要做好没捷径，只能慢慢迭代。智能马桶盖策略未执行完毕，想象的难度很低，执行起来有缺口。克制不去贪婪，真的需要勇气和耐心。</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>2024年12月17日：聚焦与放弃</span>
+                        <i class="fas fa-chevron-right accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>选择了只做新品方案，CPS果断放弃。聚焦才能漂亮的完成一件事情。周二聚焦一上午把“鼠标垫上升”分析报告做出来，成功实践吴军教导。</p>
+                    </div>
+                </div>
+                 <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>2025年01月11日：警惕捡芝麻</span>
+                        <i class="fas fa-chevron-right accordion-icon"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>践行“要事第一”中，运营销售规划过程痛苦。明知目标难达成仍要规划。转而在其他事上找重点，企图通过捡芝麻弥补丢西瓜，已背离初衷。别人看重的是业务指标价值。</p>
+                    </div>
+                </div>
+                <!-- Add more log entries if needed -->
+            </div>
+        </section>
+
+        <section id="personal-action-plan" class="content-card mt-8 scroll-animate bg-gradient-to-br from-gray-800 to-bg-card border-primary">
+            <h2 class="text-2xl font-bold text-primary mb-4 flex items-center"><i class="fas fa-tasks mr-3"></i>我的要事第一 · 行动纲领</h2>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 text-gray-200">
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">完成闭环：</strong>开始的事情务必完成。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">限制并发：</strong>保持专注，不开始太多事。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">专注时段：</strong>每日确保不受打扰的时间。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">每日规划：</strong>早晨10分钟任务优先级排序。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">周期复盘：</strong>每晚回顾，每周规划重点。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">勇于拒绝：</strong>对与核心目标不符的事务说“不”。</span></li>
+                <li class="flex items-start"><i class="fas fa-check-circle text-accent mt-1 mr-2"></i><span><strong class="font-semibold">识别“西瓜”：</strong>聚焦高影响力、可叠加收益的事。</span></li>
+            </ul>
+        </section>
+
+        <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+            <p>&copy; <span id="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+            <p>个人学习笔记，践行要事第一原则。</p>
+        </footer>
+    </div>
+
+    <!-- Modal for Pseudo Work -->
+    <div id="pseudoWorkModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+        <div class="bg-gray-800 p-6 rounded-lg shadow-xl max-w-lg w-full border border-primary">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-primary">伪工作清单 (吴军 & 罗振宇)</h3>
+                <button onclick="closePseudoWorkModal()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm max-h-[60vh] overflow-y-auto pr-2">
+                <li>在做事情前不认真思考，做事时通过简单的试错方法盲目寻找答案。</li>
+                <li>那些既不能给公司带来较大收益，又不能给用户带来价值的改进和“升级”。（如生命周期不到三个月的产品功能）</li>
+                <li>明明能够通过学习一种新技能更有效地工作，却偏偏要守着过去的旧工具工作，甚至手工操作。</li>
+                <li>做产品不讲究质量、不认真测试，上线后不停地修补，总是在花费很多的时间和精力找漏洞和打补丁。</li>
+                <li>不注重用有限的资源解决95%的问题，而是把大部分时间和精力用于纠结不重要的5%的问题。</li>
+                <li>每次开会找来大量不必要的人员旁听，或者总去参加那些不必要参加的会议。</li>
+            </ul>
+            <button onclick="closePseudoWorkModal()" class="mt-6 bg-primary text-white px-4 py-2 rounded hover:opacity-80 transition-opacity w-full text-sm">我明白了</button>
+        </div>
+    </div>
+
+    <script>
+        // JS from previous version (Accordion, Tabs, Modal, Scroll Animation, CurrentYear)
+        // is generally fine. Ensure all querySelectors are correct if class names changed.
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                if (header && content) {
+                    header.addEventListener('click', () => {
+                        const isOpen = content.classList.contains('open');
+                        // Simple toggle:
+                        content.classList.toggle('open');
+                        header.classList.toggle('open');
+                        // Optional: Close others
+                        // if (!isOpen) {
+                        //    accordionItems.forEach(otherItem => {
+                        //        if (otherItem !== item) {
+                        //            otherItem.querySelector('.accordion-content').classList.remove('open');
+                        //            otherItem.querySelector('.accordion-header').classList.remove('open');
+                        //        }
+                        //    });
+                        //}
+                    });
+                }
+            });
+
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.dataset.tab;
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    tabContents.forEach(content => {
+                        content.classList.toggle('active', content.id === targetTab);
+                    });
+                });
+            });
+
+            const currentYearElement = document.getElementById('currentYear');
+            if (currentYearElement) {
+                currentYearElement.textContent = new Date().getFullYear();
+            }
+        });
+
+        const pseudoWorkModal = document.getElementById('pseudoWorkModal');
+        function openPseudoWorkModal() {
+            if (pseudoWorkModal) pseudoWorkModal.classList.remove('hidden');
+        }
+        function closePseudoWorkModal() {
+            if (pseudoWorkModal) pseudoWorkModal.classList.add('hidden');
+        }
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && pseudoWorkModal && !pseudoWorkModal.classList.contains('hidden')) {
+                closePseudoWorkModal();
+            }
+        });
+    </script>
+</body>
+</html>
