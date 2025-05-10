@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>走出困境，解决难题 - 多语言版</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #E31937; /* Tesla Red */
+            --color-secondary: #3B82F6; /* Cool Blue */
+            --color-accent: #10B981;  /* Emerald Green */
+            --color-text-base: #D1D5DB;
+            --color-text-muted: #9CA3AF;
+            --color-text-headings: #F3F4F6;
+            --color-bg-base: #111827;
+            --color-bg-card: #1F2937;
+            --color-border: #374151;
+        }
+        body { background-color: var(--color-bg-base); color: var(--color-text-base); font-family: 'Inter', 'Noto Sans SC', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; line-height: 1.7; overflow-x: hidden; }
+        .text-primary { color: var(--color-primary); } .bg-primary { background-color: var(--color-primary); } .border-primary { border-color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); } .bg-secondary { background-color: var(--color-secondary); } .border-secondary { border-color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+
+        h1, h2, h3 { color: var(--color-text-headings); font-weight: 600; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        h2 { font-size: 1.875rem; margin-bottom: 1rem; margin-top: 2.5rem; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+        .section-title-underline { border-bottom: 3px solid; display: inline-block; padding-bottom: 0.3rem; margin-bottom: 1.5rem; }
+
+        .content-card { background-color: var(--color-bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--color-border); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .content-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
+        .story-card { background-color: var(--color-bg-base); border-left: 5px solid var(--color-secondary); padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .story-card h4 { color: var(--color-secondary); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .quote-block { border-left: 4px solid var(--color-primary); padding: 12px 20px; margin: 20px 0; font-style: italic; color: var(--color-text-muted); background-color: rgba(255,255,255,0.03); border-radius: 0 8px 8px 0; }
+        .author-cite { display: block; text-align: right; font-style: normal; color: var(--color-text-base); font-size: 0.9rem; margin-top: 8px; }
+        .dialogue-bubble { background-color: var(--color-bg-card); padding: 15px 20px; border-radius: 15px; position: relative; margin: 10px 0; border: 1px solid var(--color-border); }
+        .dialogue-bubble.left::before { content: ""; position: absolute; bottom: 15px; left: -10px; width: 0; height: 0; border-style: solid; border-width: 10px 10px 10px 0; border-color: transparent var(--color-bg-card) transparent transparent; }
+        .dialogue-bubble.right::after { content: ""; position: absolute; bottom: 15px; right: -10px; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--color-bg-card); }
+        .speaker { font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; color: var(--color-accent); }
+        .img-placeholder { width: 100%; height: 200px; background-color: #374151; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-style: italic; border-radius: 8px; margin-bottom: 16px; text-align: center; padding: 10px; }
+        
+        .accordion-header { background-color: #2c3a4f; color: var(--color-text-headings); padding: 12px 16px; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s ease; }
+        .accordion-header:hover { background-color: #374761; }
+        .accordion-content { padding: 0 16px; background-color: var(--color-bg-card); border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 4px 4px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out; }
+        .accordion-content.open { max-height: 1000px; padding-top: 16px; padding-bottom: 16px; }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-header.open .accordion-icon { transform: rotate(90deg); }
+
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+        
+        .language-tabs-container { display: flex; justify-content: center; margin-bottom: 2rem; border-bottom: 2px solid var(--color-border); }
+        .lang-tab-button { padding: 12px 25px; cursor: pointer; border: none; background-color: transparent; color: var(--color-text-muted); font-size: 1rem; font-weight: 500; transition: color 0.3s ease, border-bottom-color 0.3s ease; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+        .lang-tab-button:hover { color: var(--color-text-base); }
+        .lang-tab-button.active { color: var(--color-primary); border-bottom-color: var(--color-primary); font-weight: 600; }
+        .language-content-wrapper { display: none; }
+        .language-content-wrapper.active { display: block; }
+
+        .mistake-list li { margin-bottom: 0.5rem; }
+        .principle-list li { padding: 8px 0; border-bottom: 1px dashed var(--color-border); }
+        .principle-list li:last-child { border-bottom: none; }
+        
+        /* Modal for detailed lists or definitions */
+        .detail-modal { /* Shared class for modals */
+            position: fixed; inset: 0; background-color: rgba(0,0,0,0.75);
+            display: flex; align-items: center; justify-content: center;
+            padding: 1rem; z-index: 50; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease-in-out;
+        }
+        .detail-modal.open {
+            opacity: 1; pointer-events: auto;
+        }
+        .detail-modal-content {
+            background-color: var(--color-bg-card); color: var(--color-text-base);
+            padding: 24px; border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+            max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+            transform: scale(0.95); transition: transform 0.3s ease-in-out;
+        }
+        .detail-modal.open .detail-modal-content {
+            transform: scale(1);
+        }
+        .detail-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+        .detail-modal-title { font-size: 1.5rem; font-weight: bold; color: var(--color-primary); }
+        .detail-modal-close { background:none; border:none; font-size:1.5rem; color:var(--color-text-muted); cursor:pointer; }
+        .detail-modal-close:hover { color: var(--color-text-base); }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-10 max-w-5xl">
+
+        <!-- Language Tabs -->
+        <div class="language-tabs-container scroll-animate">
+            <button class="lang-tab-button active" data-lang="zh"><i class="fas fa-language mr-2"></i>中文</button>
+            <button class="lang-tab-button" data-lang="en"><i class="fas fa-language mr-2"></i>English</button>
+            <button class="lang-tab-button" data-lang="ja"><i class="fas fa-language mr-2"></i>日本語</button>
+        </div>
+
+        <!-- CHINESE CONTENT WRAPPER -->
+        <div id="lang-zh" class="language-content-wrapper active">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-mountain text-6xl text-primary mb-4"></i> <!-- Icon for overcoming challenges -->
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">走出困境，解决难题</h1>
+                <p class="text-xl text-gray-300 mt-3">吴军《关键时刻手册》阅读精要 · 刘冬冬</p>
+            </header>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-exclamation-triangle mr-3"></i>面对困境的常见误区
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>吴军指出，面对困境时，以下做法是错误的：</p>
+                    <ul class="list-disc list-inside ml-4 mt-3 space-y-2 mistake-list">
+                        <li><strong class="text-red-400">赌徒心理：</strong>抱着“赌一把大的”、“破釜沉舟”的心态一条道走到黑。</li>
+                        <li><strong class="text-yellow-400">轻易放弃：</strong>稍微遇到困难就改弦更张，缺乏坚持。</li>
+                        <li><strong class="text-blue-400">消沉自艾：</strong>陷入消沉、自怜自艾，破罐子破摔，混日子。</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-briefcase mr-3"></i>工作选择：叠加式进步的智慧
+                </h2>
+                <div class="content-card scroll-animate">
+                    <div class="md:flex items-center">
+                        <div class="md:w-2/3 md:pr-6">
+                            <h3 class="text-xl font-semibold text-secondary mb-3">吴军的两大原则：</h3>
+                            <ol class="list-decimal list-inside ml-4 space-y-2 principle-list">
+                                <li>确保任务<strong class="text-secondary">依赖过去的经验</strong>，这样你的价值才能体现。</li>
+                                <li>确保任务的完成能<strong class="text-secondary">增加新的经验</strong>，为未来发展提供空间。</li>
+                            </ol>
+                            <p class="mt-4">“可叠加的进步有点像爬树，站在一定高度后，要在目前位置往上爬，不要横着走，更不能跑到树底下另选一棵树重新爬。同时，要确保往上爬的方向不是一个树枝的末梢，而是一个大树干。”</p>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0">
+                            <div class="img-placeholder">
+                                <i class="fas fa-sitemap text-4xl mr-2"></i>
+                                <span>意象图：向上攀爬的粗壮树干，而非细小末梢树枝。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-lightbulb mr-3"></i>困境：是难题，非障碍
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>布朗：“困境是留给你以后回过头来看的，不是给你现在看的。” 困境是一道难题，是让你来解决的。</p>
+                    <div class="story-card mt-4 scroll-animate">
+                        <h4><i class="fas fa-quote-left mr-2"></i>布朗的两句箴言：</h4>
+                        <ul class="list-none space-y-2 mt-2">
+                            <li class="dialogue-bubble left text-sm">“如果你挑容易的事情做，你的生活就将艰难。” (Do what is easy and your life will be hard)</li>
+                            <li class="dialogue-bubble right text-sm">“你是你达成目标道路上唯一的障碍。” (You are the only real obstacle in your path to a fulfilling life.)</li>
+                        </ul>
+                    </div>
+                    <blockquote class="quote-block mt-4">
+                        刘冬冬感悟：瑞东和鸡哥的痛苦，就是因为当初选择了容易的事情做，现在的生活变得困难了。庆幸当初没有选择简单的路。
+                    </blockquote>
+                </div>
+            </section>
+
+             <section class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-hand-sparkles mr-3"></i>心态调整：和解与前行
+                </h2>
+                <div class="content-card scroll-animate">
+                    <h3 class="text-xl font-semibold text-primary mb-3">拒绝受害者叙事</h3>
+                    <p>避免陷入受害者心理，那会让你失去开放心态和合作机会。不要讲三类故事：受害者、坏人、陌生人。</p>
+                     <div class="mt-4 p-4 border border-dashed border-primary rounded-lg bg-primary/10">
+                        <h4 class="font-semibold text-primary mb-2"><i class="fas fa-heart-broken mr-2"></i>同自己和解</h4>
+                        <p>人生总有坎坷，如学业、事业、爱情挫折，失去亲人等。关键在于“同自己和解”。这并非放任自流，而是为了在悲剧后再次站起来，继续努力。</p>
+                        <p class="mt-2">“要坚信人除生死无大难，没有什么过不去的坎。我们都不是神，要学会接受自己的不完美。”</p>
+                         <blockquote class="quote-block mt-3 text-sm">
+                            刘冬冬感悟：想到死亡，只剩40年时光，就不再畏惧任何困难。意外和死亡反而给了我力量。
+                        </blockquote>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-route mr-3"></i>选择的迷思与智慧
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>西蒙·斯涅克：“很多人一辈子一事无成，是因为他们总觉得自己是搭错了车。”</p>
+                    <p class="mt-2">今天选择太多，导致不知所措或容易后悔。但吴军认为，不同的选择会带你到不同的目的地，而<strong class="text-secondary">不同的地方都会有特别的风景</strong>。</p>
+                    <blockquote class="quote-block">
+                        刘冬冬感悟：担心被安排充电宝是错误选择。但其实，只要坚持，任何领域都能做出成绩。我想要的是工作成就和专业度，运营职业也能实现。
+                    </blockquote>
+                    <div class="story-card mt-4 scroll-animate">
+                        <h4><i class="fas fa-gift mr-2"></i>吴军的三个锦囊：</h4>
+                        <ol class="list-decimal list-inside ml-4 space-y-1 text-gray-300">
+                            <li>“不要怕，去尝试”</li>
+                            <li>“别气馁，再去尝试”</li>
+                            <li>“随缘，别后悔”</li>
+                        </OLI>
+                        <p class="mt-2 text-sm">“有能力又肯干的人无论走到什么地方，假以时日总会看到让自己惊喜的风景。”</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-cut mr-3"></i>奥卡姆剃刀：简约的力量
+                </h2>
+                <div class="content-card scroll-animate">
+                     <div class="md:flex items-start">
+                        <div class="md:w-1/3 md:pr-6 mb-6 md:mb-0">
+                            <div class="img-placeholder">
+                                <i class="fas fa-lightbulb-on text-4xl mr-2"></i>
+                                <span>意象图：一把锋利的剃刀，象征剔除冗余。</span>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3">
+                            <p>“若无必要，勿增实体。” 如果能得到同样好的结论，假设越少越好。</p>
+                            <p class="mt-2">牛顿：“除那些真实而已足够说明其现象者外，不必去寻找自然界事物的其它原因。”</p>
+                            <blockquote class="quote-block mt-3">
+                                刘冬冬感悟：遇困境别想奇招，简单办法往往最有效。“以正合，以奇胜”的“奇”是多余兵力，非出奇制胜。
+                            </blockquote>
+                            <h4 class="font-semibold mt-4 mb-2 text-accent">避免简化陷阱：</h4>
+                            <ul class="list-disc list-inside text-sm">
+                                <li>坚持奥卡姆剃刀：简单直接的原因最好。</li>
+                                <li>列出所有原因，估算相关性排序，避免先入为主。</li>
+                            </ul>
+                             <button class="mt-3 text-sm text-accent hover:underline" onclick="openDetailModal('reason-ranking-example')">
+                                <i class="fas fa-list-ol mr-1"></i>查看“原因排序”示例
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="mb-12">
+                 <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-rocket mr-3"></i>主动性：上帝偏爱主动的笨人
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>史蒂芬·柯维《高效能人士的七个习惯》首要习惯：<strong class="text-primary">积极主动</strong>。</p>
+                    <div class="story-card mt-4 scroll-animate">
+                        <h4><i class="fas fa-industry-alt mr-2"></i>马云与阿里巴巴的例子：</h4>
+                        <p>面对中国电商初期的困境（无支付、无信用、无物流），马云团队主动解决问题，而非被动等待条件成熟。没有支付就自己做，没有信用就自己建，没有好物流就去谈。</p>
+                         <blockquote class="quote-block mt-3 text-sm">
+                            刘冬冬感悟：如果我作为运营，面对行业负增长只说没办法，那职业生涯也就这样了。要学习马云的主动性，思考除了完成任务，还能创造什么条件去改进。
+                        </blockquote>
+                    </div>
+                     <p class="mt-3">罗胖子提到刘强东的例子：不是问“可不可能”，而是问“<strong class="text-primary">怎么达到</strong>”。</p>
+                </div>
+            </section>
+
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-cogs mr-3"></i>成功之母与科学试错
+                </h2>
+                <div class="content-card scroll-animate">
+                    <h3 class="text-xl font-semibold text-secondary mb-3">成功是成功之母，而非失败</h3>
+                     <div class="md:flex items-start">
+                        <div class="md:w-2/3 md:pr-6">
+                            <p>吴军强调，要在动手前做足准备，<strong class="text-secondary">慎重出战，防止第一次就失败</strong>。因为第一次失败对信心打击巨大。</p>
+                            <p class="mt-2">“但凡动手不行的，脑子都比较懒，在动手之前不做好准备，不把所有可能的问题想清楚。”</p>
+                            <blockquote class="quote-block mt-3">
+                                刘冬冬感悟：做J104方案时，应思考清楚所有可能，推敲可行性，记录步骤，避免轻易失败，以获可叠加进步。
+                            </blockquote>
+                            <h4 class="font-semibold mt-4 mb-2 text-secondary">若第一次失败了：</h4>
+                             <ol class="list-decimal list-inside text-sm space-y-1">
+                                <li>花功夫找出<strong class="text-secondary">全部</strong>失败原因，而非找到一个就停止。</li>
+                                <li>找到原因后，<strong class="text-secondary">一定要重新做一遍，直到成功为止</strong>，即便事情已不重要。这是完成从失败到成功的转化。</li>
+                            </ol>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0">
+                             <div class="img-placeholder">
+                                <i class="fas fa-tools text-4xl mr-2"></i>
+                                <span>意象图：工匠精心打磨作品，或科学家专注实验。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-card scroll-animate mt-6">
+                    <h3 class="text-xl font-semibold text-secondary mb-3">科学试错，非盲目试错</h3>
+                    <p>很多人急于尝试，准备不充分，导致反复失败。科学试错的关键：</p>
+                    <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+                        <li><strong class="text-secondary">重视反馈：</strong>“闻过则喜”，负反馈帮助回到正轨。</li>
+                        <li><strong class="text-secondary">渐进过程：</strong>非一步到位，特别是获取新经验时。</li>
+                    </ul>
+                     <blockquote class="quote-block mt-3">
+                        刘冬冬感悟：运营经历不等于经验。将经历转化为经验，科学有效地获取经验，是运营的必修课。
+                    </blockquote>
+                </div>
+            </section>
+            
+            <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>&copy; <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+            </footer>
+        </div> <!-- END CHINESE CONTENT WRAPPER -->
+
+        <!-- ENGLISH CONTENT WRAPPER -->
+        <div id="lang-en" class="language-content-wrapper">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-mountain text-6xl text-primary mb-4"></i>
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">Overcoming Obstacles, Solving Problems</h1>
+                <p class="text-xl text-gray-300 mt-3">Key Insights from Wu Jun's "Critical Moments Handbook" · Liu Dongdong</p>
+            </header>
+            <!-- English content sections mirroring the Chinese structure -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-exclamation-triangle mr-3"></i>Common Pitfalls in Facing Adversity
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>[English translation of Wu Jun's points on wrong approaches to adversity...]</p>
+                </div>
+            </section>
+            <!-- ... More English sections ... -->
+            <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>&copy; <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+            </footer>
+        </div> <!-- END ENGLISH CONTENT WRAPPER -->
+
+        <!-- JAPANESE CONTENT WRAPPER -->
+        <div id="lang-ja" class="language-content-wrapper">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-mountain text-6xl text-primary mb-4"></i>
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">困難を乗り越え、問題を解決する</h1>
+                <p class="text-xl text-gray-300 mt-3">呉軍氏『鍵となる瞬間マニュアル』読書エッセンス・劉冬冬</p>
+            </header>
+            <!-- Japanese content sections mirroring the Chinese structure -->
+            <section class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-exclamation-triangle mr-3"></i>困難に直面した際のよくある誤り
+                </h2>
+                <div class="content-card scroll-animate">
+                    <p>[日本語翻訳：呉軍氏の困難への誤った対処法に関するポイント...]</p>
+                </div>
+            </section>
+            <!-- ... More Japanese sections ... -->
+             <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>&copy; <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+            </footer>
+        </div> <!-- END JAPANESE CONTENT WRAPPER -->
+
+    </div> <!-- END Main Container -->
+
+    <!-- Modal for "Reason Ranking Example" -->
+    <div id="reason-ranking-example-modal" class="detail-modal">
+        <div class="detail-modal-content">
+            <div class="detail-modal-header">
+                <h3 class="detail-modal-title"><i class="fas fa-filter mr-2"></i>原因排序示例 (奥卡姆剃刀)</h3>
+                <button class="detail-modal-close" onclick="closeDetailModal('reason-ranking-example-modal')">&times;</button>
+            </div>
+            <p class="text-sm text-gray-400 mb-3">以2024年美国大选结果（虚构示例）为例，除了经济问题，人们可能找出以下原因：</p>
+            <ol class="list-decimal list-inside space-y-2 text-sm">
+                <li>贺锦丽团队未深入基层拉票，仅靠明星站台，底层民众对明星无感。</li>
+                <li>民众对零元购和非法移民涌入感反感，渴望恢复秩序，反对民主党相关政策。</li>
+                <li>民众不愿花钱支持乌克兰。</li>
+                <li>FBI带走并处死小孩养的松鼠引发不满，百万人热议。</li>
+            </ol>
+            <p class="mt-4 font-semibold">刘冬冬对此的排序可能是： <strong class="text-secondary">2 > 3 > 1 > 4</strong></p>
+            <p class="mt-2 text-xs text-gray-500">关键在于列出所有可能原因，并基于相关性进行理性排序，避免先入为主。</p>
+        </div>
+    </div>
+    
+    <!-- Modal for Pseudo Work (from previous version, ensure its content is also translatable if needed) -->
+    <div id="pseudoWorkModal" class="detail-modal"> <!-- Reusing detail-modal class for consistency -->
+        <div class="detail-modal-content">
+            <div class="detail-modal-header">
+                 <h3 class="detail-modal-title"><i class="fas fa-ghost mr-2"></i>伪工作清单</h3>
+                <button class="detail-modal-close" onclick="closeDetailModal('pseudoWorkModal')">&times;</button>
+            </div>
+             <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm pr-2">
+                <li>在做事情前不认真思考，做事时通过简单的试错方法盲目寻找答案。</li>
+                <li>那些既不能给公司带来较大收益，又不能给用户带来价值的改进和“升级”。（如生命周期不到三个月的产品功能）</li>
+                <li>明明能够通过学习一种新技能更有效地工作，却偏偏要守着过去的旧工具工作，甚至手工操作。</li>
+                <li>做产品不讲究质量、不认真测试，上线后不停地修补，总是在花费很多的时间和精力找漏洞和打补_丁。</li>
+                <li>不注重用有限的资源解决95%的问题，而是把大部分时间和精力用于纠结不重要的5%的问题。</li>
+                <li>每次开会找来大量不必要的人员旁听，或者总去参加那些不必要参加的会议。</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Language Tabs Logic ---
+        const langTabButtons = document.querySelectorAll('.lang-tab-button');
+        const langContentWrappers = document.querySelectorAll('.language-content-wrapper');
+
+        langTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetLang = button.dataset.lang;
+
+                langTabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                langContentWrappers.forEach(wrapper => {
+                    wrapper.classList.toggle('active', wrapper.id === `lang-${targetLang}`);
+                });
+                initializeScrollAnimationsForActiveLanguage();
+                // Assuming author tabs and accordions are not used in this specific "走出困境" page
+                // If they are, you'd call their re-initialization functions here too.
+            });
+        });
+
+        function initializeScrollAnimationsForActiveLanguage() {
+            const activeLangWrapper = document.querySelector('.language-content-wrapper.active');
+            if (!activeLangWrapper) return;
+
+            const animatedElements = activeLangWrapper.querySelectorAll('.scroll-animate');
+            animatedElements.forEach(el => {
+                el.classList.remove('is-visible');
+                // It's better to let CSS handle initial state via the class itself
+                // el.style.opacity = '0'; 
+                // el.style.transform = 'translateY(30px)';
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.05 }); // Trigger a bit earlier
+            animatedElements.forEach(el => observer.observe(el));
+        }
+        
+        // Initializations for the default active language
+        initializeScrollAnimationsForActiveLanguage();
+
+        // --- Detail Modal Logic ---
+        window.openDetailModal = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('open');
+            }
+        }
+        window.closeDetailModal = function(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('open');
+            }
+        }
+         // Global click listener to close modal if clicked outside content
+        document.querySelectorAll('.detail-modal').forEach(modal => {
+            modal.addEventListener('click', function(event) {
+                if (event.target === this) { // Clicked on the backdrop
+                    this.classList.remove('open');
+                }
+            });
+        });
+         document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                document.querySelectorAll('.detail-modal.open').forEach(modal => {
+                    modal.classList.remove('open');
+                });
+            }
+        });
+        
+        // --- Re-assign for pseudoWorkModal to use new modal functions
+        // (Remove old openPseudoWorkModal and closePseudoWorkModal if they exist)
+        window.openPseudoWorkModal = function() { // Make it globally accessible for inline onclick
+            openDetailModal('pseudoWorkModal');
+        }
+        // closePseudoWorkModal is handled by the generic closeDetailModal now if the button calls closeDetailModal('pseudoWorkModal')
+
+        // Set current year in footers
+        document.querySelectorAll('.currentYear').forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
+    });
+    </script>
+</body>
+</html>
