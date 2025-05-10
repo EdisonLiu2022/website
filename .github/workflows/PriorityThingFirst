@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN"> <!-- Default language for the page itself -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>要事第一 - 多语言版</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #E31937; /* Tesla Red */
+            --color-secondary: #3B82F6; /* Cool Blue */
+            --color-accent: #10B981;  /* Emerald Green */
+            --color-text-base: #D1D5DB;
+            --color-text-muted: #9CA3AF;
+            --color-text-headings: #F3F4F6;
+            --color-bg-base: #111827;
+            --color-bg-card: #1F2937;
+            --color-border: #374151;
+        }
+        /* ... (保留之前版本的所有CSS样式: body, text-colors, headings, content-card, story-card, quote-block, dialogue-bubble, img-placeholder, accordion, scroll-animate, modal etc.) ... */
+        body {
+            background-color: var(--color-bg-base);
+            color: var(--color-text-base);
+            font-family: 'Inter', 'Noto Sans SC', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; /* Added Noto Sans for CJK */
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        .text-primary { color: var(--color-primary); }
+        .bg-primary { background-color: var(--color-primary); }
+        .border-primary { border-color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); }
+        .bg-secondary { background-color: var(--color-secondary); }
+        .border-secondary { border-color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+
+        h1, h2, h3 { color: var(--color-text-headings); font-weight: 600; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        h2 { font-size: 1.875rem; margin-bottom: 1rem; margin-top: 2.5rem; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+        .section-title-underline { border-bottom: 3px solid; display: inline-block; padding-bottom: 0.3rem; margin-bottom: 1.5rem; }
+
+        .content-card { background-color: var(--color-bg-card); border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--color-border); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .content-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04); }
+        .story-card { background-color: var(--color-bg-base); border-left: 5px solid var(--color-secondary); padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .story-card h4 { color: var(--color-secondary); font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .quote-block { border-left: 4px solid var(--color-primary); padding: 12px 20px; margin: 20px 0; font-style: italic; color: var(--color-text-muted); background-color: rgba(255,255,255,0.03); border-radius: 0 8px 8px 0; }
+        .author-cite { display: block; text-align: right; font-style: normal; color: var(--color-text-base); font-size: 0.9rem; margin-top: 8px; }
+        .dialogue-bubble { background-color: var(--color-bg-card); padding: 15px 20px; border-radius: 15px; position: relative; margin: 10px 0; border: 1px solid var(--color-border); }
+        .dialogue-bubble.left::before { content: ""; position: absolute; bottom: 15px; left: -10px; width: 0; height: 0; border-style: solid; border-width: 10px 10px 10px 0; border-color: transparent var(--color-bg-card) transparent transparent; }
+        .dialogue-bubble.right::after { content: ""; position: absolute; bottom: 15px; right: -10px; width: 0; height: 0; border-style: solid; border-width: 10px 0 10px 10px; border-color: transparent transparent transparent var(--color-bg-card); }
+        .speaker { font-weight: bold; font-size: 0.9rem; margin-bottom: 5px; color: var(--color-accent); }
+        .img-placeholder { width: 100%; height: 200px; background-color: #374151; display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-style: italic; border-radius: 8px; margin-bottom: 16px; text-align: center; padding: 10px; }
+        .accordion-header { background-color: #2c3a4f; color: var(--color-text-headings); padding: 12px 16px; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; transition: background-color 0.3s ease; }
+        .accordion-header:hover { background-color: #374761; }
+        .accordion-content { padding: 0 16px; background-color: var(--color-bg-card); border: 1px solid var(--color-border); border-top: none; border-radius: 0 0 4px 4px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding-top 0.4s ease-out, padding-bottom 0.4s ease-out; }
+        .accordion-content.open { max-height: 1000px; padding-top: 16px; padding-bottom: 16px; }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-header.open .accordion-icon { transform: rotate(90deg); }
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+        #pseudoWorkModal.hidden { display: none; }
+
+        /* Language Tabs Styles */
+        .language-tabs-container {
+            display: flex;
+            justify-content: center; /* Center the tabs */
+            margin-bottom: 2rem; /* Space below language tabs */
+            border-bottom: 2px solid var(--color-border);
+        }
+        .lang-tab-button {
+            padding: 12px 25px;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: var(--color-text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px; /* Overlap with container border */
+        }
+        .lang-tab-button:hover {
+            color: var(--color-text-base);
+        }
+        .lang-tab-button.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+            font-weight: 600;
+        }
+        .language-content-wrapper {
+            display: none; /* Hide all language contents by default */
+        }
+        .language-content-wrapper.active {
+            display: block; /* Show only active language content */
+        }
+
+        /* Author/Source Tabs (internal tabs) */
+        .author-tabs-container { margin-bottom: 20px; }
+        .author-tab-buttons { display: flex; border-bottom: 2px solid var(--color-border); }
+        .author-tab-button { padding: 10px 20px; cursor: pointer; border: none; background-color: transparent; color: var(--color-text-muted); font-weight: 500; transition: color 0.3s ease, border-bottom-color 0.3s ease; border-bottom: 3px solid transparent; margin-bottom: -2px;}
+        .author-tab-button.active { color: var(--color-secondary); border-bottom-color: var(--color-secondary); }
+        .author-tab-content { display: none; padding-top:15px; }
+        .author-tab-content.active { display: block; }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-10 max-w-5xl"> <!-- Increased max-width slightly -->
+
+        <!-- Language Tabs -->
+        <div class="language-tabs-container scroll-animate">
+            <button class="lang-tab-button active" data-lang="zh"><i class="fas fa-language mr-2"></i>中文 (Chinese)</button>
+            <button class="lang-tab-button" data-lang="en"><i class="fas fa-language mr-2"></i>English</button>
+            <button class="lang-tab-button" data-lang="ja"><i class="fas fa-language mr-2"></i>日本語 (Japanese)</button>
+        </div>
+
+        <!-- Chinese Content -->
+        <div id="lang-zh" class="language-content-wrapper active">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-compass text-6xl text-primary mb-4"></i>
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">要事第一</h1>
+                <p class="text-xl text-gray-300 mt-3">刘冬冬的主题阅读 · 悟与行</p>
+            </header>
+
+            <!-- Section: 吴军的核心观点 (Chinese) -->
+            <section id="wu-jun-core-zh" class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-book-open mr-3"></i>吴军的核心洞察
+                </h2>
+                <!-- All Chinese content cards for Wu Jun go here as in the previous version -->
+                <!-- Example card: -->
+                <div class="content-card scroll-animate">
+                    <div class="md:flex md:items-start">
+                        <div class="md:w-2/3 md:pr-8">
+                            <h3 class="text-2xl font-semibold text-primary mb-3"><i class="fas fa-cut mr-2"></i>做减法：通往高效能之路</h3>
+                            <p class="mb-3">吴军强调，要做到<strong class="text-primary">高速率、可叠加式进步</strong>，关键是<strong class="text-primary">做减法</strong>，懂得放弃。</p>
+                             <blockquote class="quote-block mt-4">
+                                刘冬冬感悟：做减法，聚焦运营...
+                            </blockquote>
+                        </div>
+                        <div class="md:w-1/3 mt-6 md:mt-0">
+                            <div class="img-placeholder">
+                                <i class="fas fa-road text-4xl mr-2"></i><span>意象图：一条清晰路径...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ... more Chinese cards for Wu Jun ... -->
+            </section>
+
+            <!-- Tabs for Other Authors/Sources (Chinese) -->
+            <section id="authors-insights-zh" class="author-tabs-container scroll-animate mb-12">
+                <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-users mr-3"></i>多方智慧：要事第一的共鸣
+                </h2>
+                <div class="author-tab-buttons">
+                    <button class="author-tab-button active" data-author-tab="liu-run-zh">刘润</button>
+                    <!-- ... other author tab buttons (Chinese) ... -->
+                </div>
+                <div id="liu-run-zh" class="author-tab-content active">
+                    <div class="content-card">
+                        <h3 class="text-xl font-semibold text-secondary mb-3"><i class="fas fa-fire-extinguisher mr-2"></i>刘润：防火胜于救火</h3>
+                        <p>消防队通过检查隐患...</p>
+                    </div>
+                </div>
+                <!-- ... other author tab contents (Chinese) ... -->
+            </section>
+
+            <!-- 刘冬冬实践日志 (Chinese) -->
+            <section id="practice-log-zh" class="scroll-animate mb-12">
+                <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-pencil-alt mr-3"></i>刘冬冬的实践日志
+                </h2>
+                <div class="accordion-container-zh space-y-3">
+                    <!-- Chinese accordion items go here -->
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>2024年12月06日：初步实践与挑战</span>
+                            <i class="fas fa-chevron-right accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content"><p>进度真的很慢...</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 行动纲领 (Chinese) -->
+            <section id="personal-action-plan-zh" class="content-card mt-8 scroll-animate bg-gradient-to-br from-gray-800 to-bg-card border-primary">
+                 <h2 class="text-2xl font-bold text-primary mb-4 flex items-center"><i class="fas fa-tasks mr-3"></i>我的要事第一 · 行动纲领</h2>
+                 <!-- Chinese action plan list -->
+            </section>
+
+            <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>© <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+                <p>个人学习笔记，践行要事第一原则。</p>
+            </footer>
+        </div>
+
+        <!-- English Content -->
+        <div id="lang-en" class="language-content-wrapper">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-compass text-6xl text-primary mb-4"></i>
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">First Things First</h1>
+                <p class="text-xl text-gray-300 mt-3">Liu Dongdong's Thematic Reading · Insights & Practices</p>
+            </header>
+
+            <!-- Section: Wu Jun's Core Insights (English) -->
+            <section id="wu-jun-core-en" class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-book-open mr-3"></i>Wu Jun's Core Insights
+                </h2>
+                <div class="content-card scroll-animate">
+                    <h3 class="text-2xl font-semibold text-primary mb-3"><i class="fas fa-cut mr-2"></i>The Art of Subtraction: Path to High Efficiency</h3>
+                    <p>[English translation of Wu Jun's core idea on 'doing less']</p>
+                    <blockquote class="quote-block mt-4">
+                        Liu Dongdong's Reflection: [English translation of reflection]
+                    </blockquote>
+                </div>
+                 <!-- ... more English cards for Wu Jun ... -->
+            </section>
+            
+            <!-- Tabs for Other Authors/Sources (English) -->
+            <section id="authors-insights-en" class="author-tabs-container scroll-animate mb-12">
+                <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-users mr-3"></i>Wisdom from Others: Echoes of "First Things First"
+                </h2>
+                <div class="author-tab-buttons">
+                    <button class="author-tab-button active" data-author-tab="liu-run-en">Liu Run</button>
+                    <!-- ... other author tab buttons (English) ... -->
+                </div>
+                <div id="liu-run-en" class="author-tab-content active">
+                    <div class="content-card">
+                        <h3 class="text-xl font-semibold text-secondary mb-3"><i class="fas fa-fire-extinguisher mr-2"></i>Liu Run: Prevention Over Firefighting</h3>
+                        <p>[English translation of Liu Run's firefighter story]</p>
+                    </div>
+                </div>
+                <!-- ... other author tab contents (English) ... -->
+            </section>
+
+            <!-- Liu Dongdong's Practice Log (English) -->
+            <section id="practice-log-en" class="scroll-animate mb-12">
+                 <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-pencil-alt mr-3"></i>Liu Dongdong's Practice Log
+                </h2>
+                <div class="accordion-container-en space-y-3">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Dec 06, 2024: Initial Practice & Challenges</span>
+                            <i class="fas fa-chevron-right accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content"><p>[English translation of log entry]</p></div>
+                    </div>
+                </div>
+            </section>
+             <!-- Action Plan (English) -->
+            <section id="personal-action-plan-en" class="content-card mt-8 scroll-animate">
+                 <h2 class="text-2xl font-bold text-primary mb-4 flex items-center"><i class="fas fa-tasks mr-3"></i>My "First Things First" Action Plan</h2>
+                 <!-- English action plan list -->
+            </section>
+
+            <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>© <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+                <p>Personal study notes, practicing "First Things First" principles.</p>
+            </footer>
+        </div>
+
+        <!-- Japanese Content -->
+        <div id="lang-ja" class="language-content-wrapper">
+            <header class="text-center mb-16 scroll-animate">
+                <i class="fas fa-compass text-6xl text-primary mb-4"></i>
+                <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent">最優先事項</h1>
+                <p class="text-xl text-gray-300 mt-3">劉冬冬のテーマ別読書・悟りと実践</p>
+            </header>
+
+            <!-- Section: Wu Jun's Core Insights (Japanese) -->
+            <section id="wu-jun-core-ja" class="mb-12">
+                <h2 class="text-3xl font-bold text-primary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-book-open mr-3"></i>呉軍氏の核心的洞察
+                </h2>
+                <div class="content-card scroll-animate">
+                    <h3 class="text-2xl font-semibold text-primary mb-3"><i class="fas fa-cut mr-2"></i>引き算の思考：高効率への道</h3>
+                    <p>[日本語翻訳：呉軍氏の「引き算」に関する核心的アイデア]</p>
+                    <blockquote class="quote-block mt-4">
+                        劉冬冬の感想：[日本語翻訳：感想]
+                    </blockquote>
+                </div>
+                <!-- ... more Japanese cards for Wu Jun ... -->
+            </section>
+            
+            <!-- Tabs for Other Authors/Sources (Japanese) -->
+            <section id="authors-insights-ja" class="author-tabs-container scroll-animate mb-12">
+                 <h2 class="text-3xl font-bold text-secondary section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-users mr-3"></i>多方面の知恵：「最優先事項」の共鳴
+                </h2>
+                <div class="author-tab-buttons">
+                    <button class="author-tab-button active" data-author-tab="liu-run-ja">劉潤</button>
+                    <!-- ... other author tab buttons (Japanese) ... -->
+                </div>
+                <div id="liu-run-ja" class="author-tab-content active">
+                    <div class="content-card">
+                         <h3 class="text-xl font-semibold text-secondary mb-3"><i class="fas fa-fire-extinguisher mr-2"></i>劉潤：消火より防火</h3>
+                        <p>[日本語翻訳：劉潤氏の消防隊の話]</p>
+                    </div>
+                </div>
+                <!-- ... other author tab contents (Japanese) ... -->
+            </section>
+
+            <!-- Liu Dongdong's Practice Log (Japanese) -->
+            <section id="practice-log-ja" class="scroll-animate mb-12">
+                <h2 class="text-3xl font-bold text-accent section-title-underline flex items-center scroll-animate">
+                    <i class="fas fa-pencil-alt mr-3"></i>劉冬冬の実践日誌
+                </h2>
+                 <div class="accordion-container-ja space-y-3">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>2024年12月06日：初期の実践と課題</span>
+                            <i class="fas fa-chevron-right accordion-icon"></i>
+                        </div>
+                        <div class="accordion-content"><p>[日本語翻訳：日誌エントリー]</p></div>
+                    </div>
+                </div>
+            </section>
+             <!-- Action Plan (Japanese) -->
+            <section id="personal-action-plan-ja" class="content-card mt-8 scroll-animate">
+                <h2 class="text-2xl font-bold text-primary mb-4 flex items-center"><i class="fas fa-tasks mr-3"></i>私の「最優先事項」行動計画</h2>
+                 <!-- Japanese action plan list -->
+            </section>
+
+            <footer class="text-center mt-20 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+                <p>© <span class="currentYear"></span> Liu Dongdong. All rights reserved.</p>
+                <p>個人的な学習ノート、「最優先事項」の原則を実践。</p>
+            </footer>
+        </div>
+
+        <!-- Modal for Pseudo Work (Shared across languages, or you can make language-specific modals) -->
+        <div id="pseudoWorkModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden">
+            <!-- Modal content from previous version -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-xl max-w-lg w-full border border-primary">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-xl font-semibold text-primary">伪工作清单 / Pseudo Work List / 「偽の仕事」リスト</h3>
+                    <button onclick="closePseudoWorkModal()" class="text-gray-400 hover:text-white text-2xl">×</button>
+                </div>
+                <ul class="list-disc list-inside space-y-2 text-gray-300 text-sm max-h-[60vh] overflow-y-auto pr-2">
+                    <li>在做事情前不认真思考，做事时通过简单的试错方法盲目寻找答案。</li>
+                    <li>Those improvements and "upgrades" that neither bring significant benefits to the company nor value to users. (e.g., product features with a lifecycle of less than three months)</li>
+                    <li>仕事の前に真剣に考えず、試行錯誤という単純な方法で盲目的に答えを探すこと。</li>
+                    {/* ... Add all items, ideally with translations ... */}
+                </ul>
+                <button onclick="closePseudoWorkModal()" class="mt-6 bg-primary text-white px-4 py-2 rounded hover:opacity-80 transition-opacity w-full text-sm">我明白了 / Got it / 分かりました</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Language Tabs Logic ---
+        const langTabButtons = document.querySelectorAll('.lang-tab-button');
+        const langContentWrappers = document.querySelectorAll('.language-content-wrapper');
+
+        langTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetLang = button.dataset.lang;
+
+                langTabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                langContentWrappers.forEach(wrapper => {
+                    wrapper.classList.toggle('active', wrapper.id === `lang-${targetLang}`);
+                });
+                // Optional: Re-initialize animations or observers for the new active content if needed
+                // For example, re-observe .scroll-animate elements within the newly active language wrapper
+                initializeScrollAnimationsForActiveLanguage();
+                // Re-initialize author tabs for the active language
+                initializeAuthorTabsForActiveLanguage();
+                // Re-initialize accordions for the active language
+                initializeAccordionsForActiveLanguage();
+            });
+        });
+
+        function initializeScrollAnimationsForActiveLanguage() {
+            const activeLangWrapper = document.querySelector('.language-content-wrapper.active');
+            if (!activeLangWrapper) return;
+
+            const animatedElements = activeLangWrapper.querySelectorAll('.scroll-animate');
+            // Reset visibility for elements that might have been animated before
+            animatedElements.forEach(el => {
+                el.classList.remove('is-visible');
+                el.style.opacity = '0'; // Reset style if directly manipulated
+                el.style.transform = 'translateY(30px)';
+            });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(el => observer.observe(el));
+        }
+        
+        function initializeAuthorTabsForActiveLanguage() {
+            const activeLangWrapper = document.querySelector('.language-content-wrapper.active');
+            if (!activeLangWrapper) return;
+
+            const authorTabsContainers = activeLangWrapper.querySelectorAll('.author-tabs-container');
+            authorTabsContainers.forEach(container => {
+                const tabButtons = container.querySelectorAll('.author-tab-button');
+                const tabContents = container.querySelectorAll('.author-tab-content');
+
+                // Deactivate all first, then activate the default (first one)
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                if (tabButtons.length > 0) {
+                    tabButtons[0].classList.add('active');
+                }
+                if (tabContents.length > 0) {
+                    const firstTabId = tabButtons.length > 0 ? tabButtons[0].dataset.authorTab : null;
+                    if (firstTabId) {
+                        const firstContent = Array.from(tabContents).find(c => c.id === firstTabId);
+                        if(firstContent) firstContent.classList.add('active');
+                    }
+                }
+
+
+                tabButtons.forEach(button => {
+                    // Remove old event listeners if any, or ensure they are scoped
+                    // For simplicity here, we assume they are newly queried or don't stack
+                    button.addEventListener('click', () => {
+                        const targetTab = button.dataset.authorTab;
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        tabContents.forEach(content => {
+                            content.classList.toggle('active', content.id === targetTab);
+                        });
+                    });
+                });
+            });
+        }
+
+        function initializeAccordionsForActiveLanguage() {
+            const activeLangWrapper = document.querySelector('.language-content-wrapper.active');
+            if (!activeLangWrapper) return;
+
+            const accordionContainers = activeLangWrapper.querySelectorAll('[class*="accordion-container-"]'); // e.g., accordion-container-zh
+            accordionContainers.forEach(container => {
+                const accordionItems = container.querySelectorAll('.accordion-item');
+                accordionItems.forEach(item => {
+                    const header = item.querySelector('.accordion-header');
+                    const content = item.querySelector('.accordion-content');
+
+                    // Reset state
+                    content.classList.remove('open');
+                    header.classList.remove('open');
+
+                    if (header && content) {
+                        header.addEventListener('click', () => {
+                            content.classList.toggle('open');
+                            header.classList.toggle('open');
+                        });
+                    }
+                });
+            });
+        }
+
+
+        // Initializations for the default active language (Chinese)
+        initializeScrollAnimationsForActiveLanguage();
+        initializeAuthorTabsForActiveLanguage();
+        initializeAccordionsForActiveLanguage();
+
+
+        // --- Modal Logic (Shared) ---
+        const pseudoWorkModal = document.getElementById('pseudoWorkModal');
+        window.openPseudoWorkModal = function() { // Make it globally accessible
+            if (pseudoWorkModal) pseudoWorkModal.classList.remove('hidden');
+        }
+        window.closePseudoWorkModal = function() { // Make it globally accessible
+            if (pseudoWorkModal) pseudoWorkModal.classList.add('hidden');
+        }
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && pseudoWorkModal && !pseudoWorkModal.classList.contains('hidden')) {
+                closePseudoWorkModal();
+            }
+        });
+
+        // Set current year in footers
+        document.querySelectorAll('.currentYear').forEach(el => {
+            el.textContent = new Date().getFullYear();
+        });
+    });
+    </script>
+</body>
+</html>
