@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《一如既往》：23条不变的永恒法则</title>
+    <script src="https://cdn.tailwindcss.com/3.4.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        :root {
+            --color-primary: #D97706; /* Amber */
+            --color-secondary: #3B82F6; /* Cool Blue */
+            --color-accent: #10B981; /* Emerald Green for a third category if needed or other highlights */
+            --color-text-base: #D1D5DB;
+            --color-text-muted: #9CA3AF;
+            --color-text-headings: #F3F4F6;
+            --color-bg-base: #111827;
+            --color-bg-card: #1F2937;
+            --color-border: #374151;
+        }
+        body { background-color: var(--color-bg-base); color: var(--color-text-base); font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif; line-height: 1.7; overflow-x: hidden; }
+        .text-primary { color: var(--color-primary); } .bg-primary { background-color: var(--color-primary); } .border-primary { border-color: var(--color-primary); }
+        .text-secondary { color: var(--color-secondary); } .bg-secondary { background-color: var(--color-secondary); } .border-secondary { border-color: var(--color-secondary); }
+        .text-accent { color: var(--color-accent); }
+
+        h1, h2, h3, h4 { color: var(--color-text-headings); font-weight: 600; }
+        h1 { font-size: 2.8rem; margin-bottom: 1rem; line-height: 1.2; }
+        h2.category-title { /* Styles for main category titles */
+            font-size: 2.2rem; 
+            font-weight: 700;
+            margin-top: 3.5rem; 
+            margin-bottom: 1.5rem; 
+            padding-bottom: 0.75rem; 
+            border-bottom: 3px solid var(--color-border);
+            display: flex;
+            align-items: center;
+        }
+        h2.category-title .category-icon { margin-right: 0.75rem; font-size: 2rem; }
+
+        h3 { font-size: 1.25rem; margin-bottom: 0.75rem; margin-top: 1.5rem; }
+        
+        .law-card { background-color: var(--color-bg-card); border-radius: 12px; padding: 20px; border: 1px solid var(--color-border); box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05), 0 4px 6px -2px rgba(0,0,0,0.03); transition: transform 0.3s ease, box-shadow 0.3s ease; display: flex; flex-direction: column; height: 100%; }
+        .law-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 20px -5px rgba(0,0,0,0.1), 0 8px 8px -5px rgba(0,0,0,0.07); }
+        .law-header { display: flex; align-items: flex-start; margin-bottom: 0.75rem; }
+        .law-number { font-size: 1.8rem; font-weight: 800; color: var(--color-primary); line-height: 1; margin-right: 0.75rem; min-width: 40px; /* Ensure space for two digits */ text-align: center; }
+        .law-titles { flex-grow: 1; }
+        .law-title-zh { font-size: 1.15rem; font-weight: 700; color: var(--color-text-headings); margin-bottom: 0.15rem; }
+        .law-title-en { font-size: 0.75rem; font-weight: 500; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+        .law-explanation { font-size: 0.9rem; color: var(--color-text-base); flex-grow: 1; padding-left: calc(40px + 0.75rem); /* Align with title, after number */ }
+        .law-card .law-icon-inline { /* Smaller icon next to title */
+            font-size: 1rem; margin-right: 0.3rem; opacity: 0.7;
+        }
+
+
+        .scroll-animate { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .scroll-animate.is-visible { opacity: 1; transform: translateY(0); }
+        .page-intro { max-width: 700px; margin-left: auto; margin-right: auto; color: var(--color-text-muted); font-size: 1.1rem; line-height: 1.8; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto px-4 py-12 max-w-5xl">
+
+        <header class="text-center mb-12 md:mb-20 scroll-animate">
+            <i class="fas fa-infinity text-5xl md:text-6xl text-primary mb-4 md:mb-6"></i>
+            <h1 class="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary via-yellow-300 to-primary">
+                《一如既往》
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mt-2 md:mt-3">Same as Ever</p>
+            <p class="page-intro mt-4 md:mt-6">
+                世界瞬息万变，但人性与基本规律却恒久不变。摩根·豪泽尔揭示了那些跨越时间、颠扑不破的永恒法则。理解这些不变，能帮助我们更好地应对变化。
+            </p>
+        </header>
+
+        <!-- 第一部分: 人性的亘古密码 -->
+        <section id="human-nature" class="mb-12">
+            <h2 class="category-title text-primary scroll-animate">
+                <i class="fas fa-brain category-icon"></i>第一部分：人性的亘古密码
+                <span class="text-sm font-normal text-gray-500 ml-2 hidden md:inline-block">UNDERSTANDING HUMAN NATURE</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 法则 1-8 (示例) -->
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">01</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-users law-icon-inline text-secondary"></i>人总是出人意料</h3>
+                            <p class="law-title-en">People Are Surprising</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">我们永远无法完全预测他人行为，因为情感、偏见和短期激励往往胜过理性。不要低估人性的复杂和随机性。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                     <div class="law-header">
+                        <div class="law-number">02</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-theater-masks law-icon-inline text-secondary"></i>故事胜过统计</h3>
+                            <p class="law-title-en">Stories are More Powerful Than Stats</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">情感化的叙事和个人故事比冰冷的数据更能打动人心，塑造信念。我们通过故事理解世界。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">03</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-grin-beam-sweat law-icon-inline text-secondary"></i>期望驱动幸福</h3>
+                            <p class="law-title-en">Happiness is Expectations Minus Reality</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">幸福感更多取决于现实与期望的差距，而非绝对的客观条件。管理期望比改变现实更容易带来满足。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">04</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-bolt law-icon-inline text-secondary"></i>激励是超能力</h3>
+                            <p class="law-title-en">Incentives are Superpowers</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">激励（经济、社会、情感等）是行为的最强驱动力之一。想理解行为，先理解其背后的激励机制。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">05</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-running law-icon-inline text-secondary"></i>事情总会出错</h3>
+                            <p class="law-title-en">Things That Have Never Happened Before Happen All The Time</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">尽管我们依赖过去的经验，但“史无前例”的事情总在发生。世界比我们想象的更随机，保持敬畏和弹性。</p>
+                </div>
+                 <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">06</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-user-shield law-icon-inline text-secondary"></i>风险是看不见的</h3>
+                            <p class="law-title-en">Risk is What You Don't See</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">最大的风险往往不是已知的、被讨论的，而是那些潜伏在视野之外的、未曾预料的“黑天鹅”。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">07</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-bed law-icon-inline text-secondary"></i>我们都渴望安逸</h3>
+                            <p class="law-title-en">The Seduction of Pessimism in a World That Keeps Getting Better</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">尽管世界在长期趋势上持续进步，但悲观主义论调总有市场，因为它迎合了我们对确定性和控制感的渴望，以及对损失的厌恶。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">08</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-users-cog law-icon-inline text-secondary"></i>最好的故事会胜出</h3>
+                            <p class="law-title-en">The Best Story Wins (Even if it's not the truest)</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">能够引发共鸣、易于传播的故事，即使不完全准确，也往往比复杂但真实的事实更有影响力。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第二部分: 世界的运转逻辑 -->
+        <section id="world-logic" class="mb-12">
+            <h2 class="category-title text-secondary scroll-animate">
+                <i class="fas fa-cogs category-icon"></i>第二部分：世界的运转逻辑
+                 <span class="text-sm font-normal text-gray-500 ml-2 hidden md:inline-block">HOW THE WORLD REALLY WORKS</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 法则 9-16 (示例) -->
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">09</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-history law-icon-inline text-primary"></i>历史是周期性的</h3>
+                            <p class="law-title-en">History is Cyclical</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">繁荣与衰退、乐观与悲观、扩张与收缩……许多宏观现象以周期形式重复出现，因为人性不变。</p>
+                </div>
+                 <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">10</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-exchange-alt law-icon-inline text-primary"></i>没有什么是免费的</h3>
+                            <p class="law-title-en">Everything has a Price (But not all prices appear on labels)</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">任何收益都有其成本，即使这些成本不直接以金钱形式体现，也可能表现为时间、精力、机会或压力。</p>
+                </div>
+                 <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">11</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-balance-scale-left law-icon-inline text-primary"></i>优势劣汰，但“好”是相对的</h3>
+                            <p class="law-title-en">Survival of the Fittest (But "fittest" is relative and changes)</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">环境变化时，曾经的优势可能变为劣势。“适应性”比单一的“强大”更重要。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">12</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-arrows-alt-h law-icon-inline text-primary"></i>钟摆总会摆回来</h3>
+                            <p class="law-title-en">The Pendulum Swings</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">市场情绪、社会趋势、政治风向等，常像钟摆一样从一个极端摆向另一个极端，很少停留在中间。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">13</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-tree law-icon-inline text-primary"></i>复利效应的魔力</h3>
+                            <p class="law-title-en">The Power of Compounding</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">微小的、持续的增长或积累，经过足够长的时间，会产生惊人的、非线性的结果。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">14</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-compress-arrows-alt law-icon-inline text-primary"></i>竞争趋向同质化</h3>
+                            <p class="law-title-en">Competition Breeds Homogeneity</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">在激烈竞争下，成功的模式会被模仿，导致产品、策略和服务趋于相似，除非有持续的创新。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">15</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-undo-alt law-icon-inline text-primary"></i>少即是多，简单有效</h3>
+                            <p class="law-title-en">Less is More (Simplicity is often best)</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">复杂的系统更容易出错，简单的解决方案往往更健壮、更持久。奥卡姆剃刀原理的体现。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">16</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-cloud-rain law-icon-inline text-primary"></i>进步需要混乱与不适</h3>
+                            <p class="law-title-en">Progress Requires Discomfort and Chaos</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">真正的创新和进步往往伴随着旧秩序的打破、不确定性以及一定程度的混乱和不适感。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第三部分: 生活的永恒智慧 -->
+        <section id="life-wisdom" class="mb-12">
+            <h2 class="category-title text-accent scroll-animate">
+                <i class="fas fa-leaf category-icon"></i>第三部分：生活的永恒智慧
+                 <span class="text-sm font-normal text-gray-500 ml-2 hidden md:inline-block">TIMELESS WISDOM FOR LIFE</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 法则 17-23 (示例) -->
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">17</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-shield-alt law-icon-inline text-secondary"></i>安全边际的重要性</h3>
+                            <p class="law-title-en">The Importance of Margin of Safety</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">在财务、决策和生活中预留缓冲空间，以应对不可预测的冲击和错误，是长期生存的关键。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">18</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-shoe-prints law-icon-inline text-secondary"></i>慢慢来，比较快</h3>
+                            <p class="law-title-en">Slow and Steady Wins the Race</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">可持续的、长期的成功往往来自于耐心、坚持和避免灾难性错误，而非追求速成和短期爆发。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">19</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-user-check law-icon-inline text-secondary"></i>玩你自己的游戏</h3>
+                            <p class="law-title-en">Play Your Own Game</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">理解自己的优势、劣势、目标和风险承受能力，据此制定策略，而不是盲目模仿他人。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">20</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-universal-access law-icon-inline text-secondary"></i>每个人都相信自己是对的</h3>
+                            <p class="law-title-en">Everyone Believes They Are Right</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">人们的行为基于他们自身的认知、经验和激励，即使这些在外人看来是错误的。理解这点有助于沟通和同理心。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">21</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-hourglass-end law-icon-inline text-secondary"></i>耐心是稀缺的美德</h3>
+                            <p class="law-title-en">Patience is a Scarce Virtue</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">在即时满足的时代，保持长期视角和耐心，往往能带来巨大的竞争优势。</p>
+                </div>
+                 <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">22</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-question law-icon-inline text-secondary"></i>保持谦逊和好奇</h3>
+                            <p class="law-title-en">Stay Humble, Stay Curious</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">承认自己的无知，对世界保持好奇心，是持续学习和适应变化的基础。</p>
+                </div>
+                <div class="law-card scroll-animate">
+                    <div class="law-header">
+                        <div class="law-number">23</div>
+                        <div class="law-titles">
+                            <h3 class="law-title-zh"><i class="fas fa-anchor law-icon-inline text-secondary"></i>不变的是变化本身</h3>
+                            <p class="law-title-en">The Only Constant is Change (But human nature is timeless)</p>
+                        </div>
+                    </div>
+                    <p class="law-explanation">世界总在变化，但驱动这些变化背后的人性法则却恒久不变。理解这些不变，才能更好地驾驭变化。</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 md:mt-24 py-10 border-t border-gray-700 text-sm text-gray-500 scroll-animate">
+            <p>&copy; <span id="currentYear"></span> 内容灵感源自 摩根·豪泽尔《一如既往》(Same as Ever)。</p>
+            <p>本网页所示法则列表及分类仅供学习参考，请以原书为准。由AI辅助生成。</p>
+        </footer>
+
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const animatedElements = document.querySelectorAll('.scroll-animate');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                     // Optional: remove if you want animation to replay when scrolling up
+                    // entry.target.classList.remove('is-visible');
+                }
+            });
+        }, { threshold: 0.05 }); // Trigger a bit earlier for smoother appearance
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) {
+            currentYearElement.textContent = new Date().getFullYear();
+        }
+    });
+    </script>
+</body>
+</html>
