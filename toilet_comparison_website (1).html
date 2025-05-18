@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能马桶对比 - 产品选择</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: #f5f5f7;
+            color: #1d1d1f;
+            line-height: 1.5;
+            width: 100%;
+            overflow-x: hidden;
+            font-size: 14px;
+        }
+        
+        .container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 16px;
+        }
+        
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #86868b;
+            margin-bottom: 16px;
+        }
+        
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: #f5f5f7;
+            width: 100%;
+        }
+        
+        .product-selector {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 12px 16px;
+            background-color: rgba(245, 245, 247, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid #d2d2d7;
+        }
+        
+        .selector-container {
+            flex: 1;
+        }
+        
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #d2d2d7;
+            background-color: white;
+            font-size: 14px;
+            color: #1d1d1f;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px top 50%;
+            background-size: 12px auto;
+            cursor: pointer;
+        }
+        
+        .table-header {
+            display: flex;
+            border-bottom: 1px solid #d2d2d7;
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 100%;
+        }
+        
+        .header-cell {
+            flex: 1;
+            padding: 16px 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .header-cell:first-child {
+            flex: 0.8;
+            text-align: left;
+            padding-left: 16px;
+        }
+        
+        .comparison-table {
+            background-color: white;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .comparison-row {
+            display: flex;
+            border-bottom: 1px solid #d2d2d7;
+            width: 100%;
+        }
+        
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+        
+        .row-label {
+            flex: 0.8;
+            padding: 14px 12px 14px 16px;
+            font-weight: 500;
+            font-size: 14px;
+            background-color: #f5f5f7;
+        }
+        
+        .row-cell {
+            flex: 1;
+            padding: 14px 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .price {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        
+        .highlight {
+            color: #0066cc;
+            font-weight: 500;
+        }
+        
+        .buy-button {
+            background-color: #0071e3;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .buy-button:hover {
+            background-color: #0077ed;
+        }
+        
+        .product-image {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin: 10px auto;
+        }
+        
+        .yes-icon {
+            color: #4cd964;
+            font-weight: bold;
+        }
+        
+        .no-icon {
+            color: #ff3b30;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px 16px;
+            color: #86868b;
+            font-size: 12px;
+            background-color: #f5f5f7;
+        }
+        
+        /* 对于更小的手机屏幕优化 */
+        @media (max-width: 350px) {
+            .product-image {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .row-label, .row-cell {
+                padding: 12px 8px;
+                font-size: 13px;
+            }
+            
+            .header-cell {
+                padding: 14px 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>智能马桶对比</h1>
+            <p class="subtitle">选择最适合您家庭的高品质智能马桶</p>
+        </header>
+        
+        <div class="sticky-header">
+            <div class="product-selector">
+                <div class="selector-container">
+                    <select id="product-select-1" onchange="updateProductComparison()">
+                        <option value="0">大白鲸Pro智能马桶</option>
+                        <option value="1">黑鲸W3.0智能马桶</option>
+                        <option value="2">黑鲸X智能马桶</option>
+                        <option value="3">黑鲸Pro2.0智能马桶</option>
+                    </select>
+                </div>
+                <div class="selector-container">
+                    <select id="product-select-2" onchange="updateProductComparison()">
+                        <option value="1">黑鲸W3.0智能马桶</option>
+                        <option value="0">大白鲸Pro智能马桶</option>
+                        <option value="2">黑鲸X智能马桶</option>
+                        <option value="3">黑鲸Pro2.0智能马桶</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="table-header">
+                <div class="header-cell">参数</div>
+                <div class="header-cell" id="header-1">大白鲸Pro</div>
+                <div class="header-cell" id="header-2">黑鲸W3.0</div>
+            </div>
+        </div>
+        
+        <div class="comparison-table" id="comparison-table">
+            <!-- 表格内容将由JavaScript动态生成 -->
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>© 2025 智能卫浴有限公司. 保留所有权利。</p>
+    </div>
+
+    <script>
+        // 产品数据
+        const products = [
+            {
+                name: "大白鲸Pro",
+                image: "https://img10.360buyimg.com/imgzone/jfs/t1/312241/19/1764/23779/682878bbF09f78866/b18d78085a6b8986.png",
+                price: "¥2,299",
+                mobileControl: false,
+                smartFlush: true,
+                foamShield: true,
+                uvc: false,
+                waterTank: true,
+                flushPower: "5倍",
+                flushSound: "轻音",
+                autoLid: true,
+                footFlush: true,
+                tempSeat: true,
+                deodorize: false,
+                uvNozzle: false,
+                wash: true,
+                movingNozzle: true,
+                massage: true,
+                siaa: true,
+                powerOutage: true,
+                powerSave: true
+            },
+            {
+                name: "黑鲸W3.0",
+                image: "https://img10.360buyimg.com/imgzone/jfs/t1/290945/20/7349/174980/682834e2F5fed43d2/eb980980b980c23d.png",
+                price: "¥3,099",
+                mobileControl: false,
+                smartFlush: true,
+                foamShield: true,
+                uvc: false,
+                waterTank: true,
+                flushPower: "5倍",
+                flushSound: "轻音",
+                autoLid: true,
+                footFlush: true,
+                tempSeat: true,
+                deodorize: true,
+                uvNozzle: true,
+                wash: true,
+                movingNozzle: true,
+                massage: true,
+                siaa: true,
+                powerOutage: true,
+                powerSave: true
+            },
+            {
+                name: "黑鲸X",
+                image: "https://img10.360buyimg.com/imgzone/jfs/t1/314041/7/1679/21519/68283578F427921f2/be9bb6232474d70e.png",
+                price: "¥3,299",
+                mobileControl: false,
+                smartFlush: true,
+                foamShield: true,
+                uvc: true,
+                waterTank: true,
+                flushPower: "8倍",
+                flushSound: "轻音",
+                autoLid: true,
+                footFlush: true,
+                tempSeat: true,
+                deodorize: true,
+                uvNozzle: true,
+                wash: true,
+                movingNozzle: true,
+                massage: true,
+                siaa: true,
+                powerOutage: true,
+                powerSave: false
+            },
+            {
+                name: "黑鲸Pro2.0",
+                image: "https://img10.360buyimg.com/imgzone/jfs/t1/314041/7/1679/21519/68283578F427921f2/be9bb6232474d70e.png",
+                price: "¥3,499",
+                mobileControl: true,
+                smartFlush: true,
+                foamShield: true,
+                uvc: true,
+                waterTank: true,
+                flushPower: "8倍",
+                flushSound: "静音",
+                autoLid: true,
+                footFlush: true,
+                tempSeat: true,
+                deodorize: true,
+                uvNozzle: true,
+                wash: true,
+                movingNozzle: true,
+                massage: true,
+                siaa: true,
+                powerOutage: true,
+                powerSave: true
+            }
+        ];
+        
+        // 定义所有功能参数及其显示名称
+        const featureMap = {
+            "image": { label: "产品图片", type: "image" },
+            "price": { label: "预算", type: "text" },
+            "mobileControl": { label: "手机操控", type: "boolean" },
+            "smartFlush": { label: "智能大小冲", type: "boolean" },
+            "foamShield": { label: "千次泡沫盾防溅隔臭", type: "boolean" },
+            "uvc": { label: "UVC水路杀菌", type: "boolean" },
+            "waterTank": { label: "独立水箱", type: "boolean" },
+            "flushPower": { label: "冲力超同级马桶", type: "text" },
+            "flushSound": { label: "冲水音量", type: "text" },
+            "autoLid": { label: "自动翻盖翻围", type: "boolean" },
+            "footFlush": { label: "脚感自动冲水", type: "boolean" },
+            "tempSeat": { label: "四季温感", type: "boolean" },
+            "deodorize": { label: "自动除臭", type: "boolean" },
+            "uvNozzle": { label: "喷头紫外线杀菌", type: "boolean" },
+            "wash": { label: "臀洗和妇洗", type: "boolean" },
+            "movingNozzle": { label: "喷杆移动清洗", type: "boolean" },
+            "massage": { label: "冷热按摩清洗", type: "boolean" },
+            "siaa": { label: "SIAA日本抗菌", type: "boolean" },
+            "powerOutage": { label: "停电冲水", type: "boolean" },
+            "powerSave": { label: "节电模式", type: "boolean" }
+        };
+        
+        function updateProductComparison() {
+            const select1 = document.getElementById("product-select-1");
+            const select2 = document.getElementById("product-select-2");
+            const product1Index = parseInt(select1.value);
+            const product2Index = parseInt(select2.value);
+            
+            const product1 = products[product1Index];
+            const product2 = products[product2Index];
+            
+            // 更新表头
+            document.getElementById("header-1").textContent = product1.name;
+            document.getElementById("header-2").textContent = product2.name;
+            
+            // 清空比较表格
+            const tableContainer = document.getElementById("comparison-table");
+            tableContainer.innerHTML = "";
+            
+            // 遍历所有功能生成表格行
+            Object.keys(featureMap).forEach(feature => {
+                // 如果两个产品都没有该功能且是布尔类型(除了基本信息)，则不显示该行
+                if (featureMap[feature].type === "boolean" && 
+                    !product1[feature] && !product2[feature]) {
+                    return;
+                }
+                
+                const row = document.createElement("div");
+                row.className = "comparison-row";
+                
+                const label = document.createElement("div");
+                label.className = "row-label";
+                label.textContent = featureMap[feature].label;
+                row.appendChild(label);
+                
+                const cell1 = document.createElement("div");
+                cell1.className = "row-cell";
+                const cell2 = document.createElement("div");
+                cell2.className = "row-cell";
+                
+                // 根据参数类型设置单元格内容
+                if (featureMap[feature].type === "image") {
+                    const img1 = document.createElement("img");
+                    img1.src = product1[feature];
+                    img1.alt = product1.name;
+                    img1.className = "product-image";
+                    cell1.appendChild(img1);
+                    
+                    const img2 = document.createElement("img");
+                    img2.src = product2[feature];
+                    img2.alt = product2.name;
+                    img2.className = "product-image";
+                    cell2.appendChild(img2);
+                } else if (featureMap[feature].type === "boolean") {
+                    cell1.innerHTML = product1[feature] ? 
+                        '<span class="yes-icon">✓</span>' : '<span class="no-icon">✕</span>';
+                    cell2.innerHTML = product2[feature] ? 
+                        '<span class="yes-icon">✓</span>' : '<span class="no-icon">✕</span>';
+                } else {
+                    cell1.textContent = product1[feature];
+                    cell2.textContent = product2[feature];
+                }
+                
+                row.appendChild(cell1);
+                row.appendChild(cell2);
+                tableContainer.appendChild(row);
+            });
+        }
+        
+        // 初始化页面
+        document.addEventListener("DOMContentLoaded", updateProductComparison);
+    </script>
+</body>
+</html>
